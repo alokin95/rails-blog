@@ -10,6 +10,7 @@ class PostsController < ApplicationController
   # GET /posts/1
   # GET /posts/1.json
   def show
+    @post = Post.includes(:category, :comments, :user, :comments => :user).where('id = ?', params[:id]).first
     @comment = Comment.new
   end
 

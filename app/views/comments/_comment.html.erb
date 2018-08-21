@@ -1,0 +1,24 @@
+ <div class='comments'> 
+
+   <div class='comment'>
+      <span>
+          <%= comment.user %> <%= time_ago_in_words(comment.created_at) unless comment.created_at.blank? %> ago
+      </span>
+      <p>
+        <%= comment.title %>
+      </p>
+      <p>
+        <%= comment.body %>
+      </p>
+
+      <% if user_signed_in? %>
+      <% if current_user == comment.user_id? || current_user.role_id != 3 %>
+            <p>
+       <%= link_to 'Delete comment', [comment],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+      </p>
+      <% end %>
+      </div>
+  <% end %>
+</div>

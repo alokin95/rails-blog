@@ -1,0 +1,21 @@
+<div class="post-preview">
+              <h2 class="post-title">
+                  <%= link_to post.title, post_path(post) %>
+              </h2>
+              <h6>
+                In <%= post.category.name %>
+            </a>
+            <p class="post-meta">Posted by
+              <a href="#"><%= link_to post.user.email, users_path(post.user) %></a> <%= time_ago_in_words(post.created_at) %> ago</p>
+          </div>
+          <% if user_signed_in? %>
+          <% if current_user == post.user_id? || current_user.role_id != 3 %>
+      <p>
+  <%= link_to 'Delete post', [post],
+               method: :delete,
+               data: { confirm: 'Are you sure?' } %>
+               <%= link_to 'Edit post', edit_post_path(post) %>
+        </p>
+        <% end %>
+        <% end %>
+          <hr>

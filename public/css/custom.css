@@ -1,0 +1,20 @@
+.comment {
+  width: 400px;
+  min-height: 200px;
+  margin: auto;
+  margin-bottom: 10px;
+  background-color: #F6E6FF;
+  padding: 20px;
+}
+
+.comment span {
+  color: seagreen;
+}
+
+.comment p:first-of-type {
+  font-style: italic;
+}
+
+.comment p {
+  margin-top: 10px
+}

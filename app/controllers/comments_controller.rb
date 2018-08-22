@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @comments = Comment.includes(:user, :post)
   end
 
   # GET /comments/1
@@ -24,7 +24,7 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @post = Post.find(params[:post_id])
+    @post = Post.find(params[:comment][:post_id])
     @comment = @post.comments.new(comment_params)
     @comment.user = current_user
 

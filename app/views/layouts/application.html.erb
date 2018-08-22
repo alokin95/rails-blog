@@ -13,8 +13,9 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
+    <script src="<%= root_url%>/vendor/jquery/jquery.min.js"></script>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <!-- Bootstrap core CSS -->
     <link href="<%= root_url%>/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
@@ -48,7 +49,6 @@
     <%= render "layouts/footer.html.erb" %>
 
      <!-- Bootstrap core JavaScript -->
-    <script src="<%= root_url%>/vendor/jquery/jquery.min.js"></script>
     <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
      <!-- Custom scripts for this template -->

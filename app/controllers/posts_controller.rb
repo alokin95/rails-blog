@@ -5,7 +5,15 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if user_signed_in?
+      if current_user.role_id != 1
+        @posts = Post.includes(:user, :category).where('status = ?', 1)
+      else
+        @posts = Post.includes(:user, :category)
+      end
+    else
+      @posts = Post.includes(:user, :category).where('status = ?', 1)
+    end
   end
 
   # GET /posts/1
@@ -65,6 +73,17 @@ class PostsController < ApplicationController
     end
   end
 
+  def filter
+    @posts = Post.includes(:category, :user).where('status = ?', params[:status])
+    respond_to do |format|
+      if @posts
+        format.js { render :json => @posts }
+      else
+        format.js { render :json => @posts.errors, :status => :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post
@@ -73,6 +92,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :user_id, :category_id)
+      params.require(:post).permit(:title, :body, :user_id, :category_id, :status)
     end
 end

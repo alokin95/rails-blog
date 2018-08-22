@@ -14,3 +14,30 @@
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+$(document).ready(function(){
+ 
+  $('.filter').on('click', function(){
+
+    var status = $(this).val();
+      $.ajax({
+        url: '/get-filtered-posts',
+        type: "POST",
+        data: {
+          status
+        },
+        success: function(response)
+        {
+          var text = "";
+
+          var posts = JSON.parse(response);
+
+          console.log(posts);
+
+          $.each(posts, function(index, value){
+            
+          })
+        }
+      })
+  })
+
+});

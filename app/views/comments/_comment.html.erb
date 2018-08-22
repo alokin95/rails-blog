@@ -12,13 +12,13 @@
       </p>
 
       <% if user_signed_in? %>
-      <% if current_user == comment.user_id? || current_user.role_id != 3 %>
+      <% if current_user.role_id != 3 %>
             <p>
        <%= link_to 'Delete comment', [comment],
                method: :delete,
                data: { confirm: 'Are you sure?' } %>
       </p>
       <% end %>
-      </div>
   <% end %>
+      </div>
 </div>

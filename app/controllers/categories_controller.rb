@@ -1,5 +1,6 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
+  before_action :require_admin, only: [:destroy, :edit, :update, :new, :create]
 
   # GET /categories
   # GET /categories.json
@@ -10,6 +11,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    @categories = Category.includes(:user, :posts).where('id = ?', params[:id])
   end
 
   # GET /categories/new

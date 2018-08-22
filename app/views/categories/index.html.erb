@@ -2,6 +2,9 @@
 
 <h1>Categories</h1>
 
+<hr>
+
+<% if user_signed_in? && current_user.role_id == 1 %>
 <table>
   <thead>
     <tr>
@@ -21,7 +24,14 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to 'New Category', new_category_path %>
+
+<% else %>
+
+  <% @categories.each do |category| %>
+    <h4><%= link_to category.name, category %></h4>
+  <% end %>
+
+<% end %>

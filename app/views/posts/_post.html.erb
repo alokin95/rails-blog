@@ -3,7 +3,7 @@
                   <%= link_to post.title, post_path(post) %>
               </h2>
               <h6>
-                In <%= post.category.name %>
+                In <%= link_to post.category.name, post.category %>
             </a>
             <p class="post-meta">Posted by <%= post.user.email %> <%= time_ago_in_words(post.created_at) %> ago</p>
           </div>

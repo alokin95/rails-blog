@@ -28,7 +28,9 @@
   <div class="row">
 
     <div class="col-6">
+    <% if user_signed_in? %>
       <%= render 'comments/form' %>
+    <% end %>
     </div>
 
 

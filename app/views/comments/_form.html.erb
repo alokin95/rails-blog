@@ -1,6 +1,6 @@
 <h2>Add a comment:</h2>
 <%= form_with(model: [ @comment ], local: true) do |form| %>
-<%= hidden_field_tag(:post_id, @post.id) %>
+<%= form.hidden_field :post_id, :value => params[:id] ? Post.find(params[:id]).id : Post.find(params[:post_id]).id %>
   <p>
     <%= form.label :title %><br>
     <%= form.text_field :title %>

@@ -1,0 +1,20 @@
+<h2>Add a comment:</h2>
+<%= form_with(model: [ @comment ], local: true) do |form| %>
+  <p>
+    <%= form.label :title %><br>
+    <%= form.text_field :title %>
+  </p>
+  <p>
+    <%= form.label :body %><br>
+    <%= form.text_area :body %>
+  </p>
+
+<div class="field">
+    <%= form.label :Post %>
+    <%= form.collection_select :post_id, Post.all, :id, :title %>
+  </div>
+
+  <p>
+    <%= form.submit 'Save comment' %>
+  </p>
+<% end %>

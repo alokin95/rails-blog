@@ -73,17 +73,6 @@ class PostsController < ApplicationController
     end
   end
 
-  def filter
-    @posts = Post.includes(:category, :user).where('status = ?', params[:status])
-    respond_to do |format|
-      if @posts
-        format.js { render :json => @posts }
-      else
-        format.js { render :json => @posts.errors, :status => :unprocessable_entity }
-      end
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_post

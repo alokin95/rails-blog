@@ -16,9 +16,11 @@
     <%= form.text_field :title %>
   </div>
 
+  <%= form.file_field :image %>
+
   <div class="field">
     <%= form.label :body %>
-    <%= form.text_area :body %>
+    <%= form.cktext_area :body %>
   </div>
 
   <div class="field">

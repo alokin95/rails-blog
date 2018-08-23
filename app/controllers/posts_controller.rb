@@ -1,6 +1,6 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :require_admin, only: [:new, :create, :edit, :update]
+  before_action only: [:destroy]
 
   # GET /posts
   # GET /posts.json
@@ -70,6 +70,17 @@ class PostsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
+    end
+  end
+
+  def draft 
+    if current_user.role_id == 3
+      raise ActionController::RoutingError.new('Not Found')
+    end
+    if current_user.id == 1 
+      @posts = Post.includes(:user, :category).where('status = ?', 0)
+    else
+      @posts = Post.includes(:user, :category).where("status = :status AND user_id = :user_id", {status: 0, user_id: current_user.id})
     end
   end
 

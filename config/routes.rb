@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :roles
   
   root to: 'posts#index'
-  post '/get-filtered-posts', to: 'posts#filter'
+  get 'posts/draft-posts', to: 'posts#draft'
   
   resources :posts
 

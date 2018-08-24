@@ -1,13 +1,13 @@
 <div class="post-preview">
 
-<%= image_tag(post.image) %>
+            <%= image_tag(post.image) %>
               <h2 class="post-title">
                   <%= link_to post.title, post_path(post) %>
               </h2>
               <h6>
                 in <%= link_to post.category.name, post.category %>
             </a>
-            <p class="post-meta">Posted by <%= post.user.email %> <%= time_ago_in_words(post.created_at) %> ago</p>
+            <p class="post-meta">Posted by <%= post.user.full_name %> <%= time_ago_in_words(post.created_at) %> ago</p>
           </div>
           <% if user_signed_in? %>
             <% if current_user.role_id != 3 && current_user.role_id != 2 %>

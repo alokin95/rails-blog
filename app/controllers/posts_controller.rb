@@ -1,10 +1,9 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action only: [:destroy]
+  before_action :require_admin, only: [:destroy, :index]
 
-  # GET /posts
-  # GET /posts.json
-  def index
+
+  def all
     if user_signed_in?
       if current_user.role_id != 1
         @posts = Post.includes(:user, :category).where('status = ?', 1)
@@ -14,6 +13,11 @@ class PostsController < ApplicationController
     else
       @posts = Post.includes(:user, :category).where('status = ?', 1)
     end
+  end
+  # GET /posts
+  # GET /posts.json
+  def index
+    @posts = Post.includes(:user, :category)
   end
 
   # GET /posts/1
@@ -37,7 +41,9 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user = current_user
-
+    if !params[:image]
+      @post.image.attach(io: File.open(Rails.root.join('app', 'assets', 'images', 'default-post.png')), filename: 'default-post.png', content_type: 'image/png')
+    end
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: 'Post was successfully created.' }
@@ -92,6 +98,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :body, :user_id, :category_id, :status)
+      params.require(:post).permit(:title, :body, :user_id, :category_id, :status, :image)
     end
 end

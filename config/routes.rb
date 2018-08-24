@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   mount Ckeditor::Engine => '/ckeditor'
   resources :roles
   
-  root to: 'posts#index'
+  root to: 'posts#all'
   get 'posts/draft-posts', to: 'posts#draft'
   
   resources :posts

@@ -6,10 +6,12 @@
 
 <% @categories.each do |category| %>
     <h4><%= link_to category.name, category %></h4>
+    <p><%= category.posts.last ? "Last post published #{time_ago_in_words(category.posts.last.updated_at)}" : "" %>
+    <p><%= category.posts.count %> posts in this category.
+    <hr>
   <% end %>
 
 <% if user_signed_in? && current_user.role_id == 1 %>
-<hr>
 <table>
   <thead>
     <tr>
